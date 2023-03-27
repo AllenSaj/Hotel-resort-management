@@ -1,0 +1,87 @@
+
+/**
+ * Write a description of class Tourist here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class Tourist extends Card {
+    // instance variables - replace the example below with your own
+    private int idNo;
+    private String name;
+    private int luxRating;
+    private int credits;
+    private int journeyPts;
+    private String country;
+
+    /**
+     * Constructor for objects of class Tourist
+     */
+    public Tourist(int id, String name, int luxRating, int creds, String cntry) {
+        // initialise instance variables
+        super(id, name, luxRating, creds);
+        this.country = cntry;
+    }
+
+    public int getIdNo() { return super.getIdNo(); }
+    
+    /**
+     * 
+     *
+     * @param  
+     * @return    
+     */
+    public String getName() { return super.getName(); }
+    
+    /**
+     * 
+     *
+     * @param  
+     * @return    
+     */
+    public int getLuxRating() { return super.getLuxRating(); }
+    
+    /**
+     * 
+     *
+     * @param  
+     * @return    
+     */
+    public int getCredits() { return super.getCredits(); }
+    
+    /**
+     * 
+     *
+     * @param  
+     * @return    
+     */
+    public int getJourneyPts() { return super.getJourneyPts(); }
+    
+    public String getCountry() { return country; }
+    
+    public void addCredits(int c) { super.addCredits(c); }
+    
+    public void deductCredits(int c) { super.deductCredits(c); }
+    
+    public void addJourneyPts(int j) { super.addJourneyPts(j); }
+    
+    public void deductJourneyPts(int j) { super.deductJourneyPts(j); }
+    
+    public void convertPts() { super.convertPts(); }
+
+    public void useFerry() {
+       super.useFerry();
+       super.deductCredits(1);
+    }
+    
+    /**
+     * 
+     *
+     * @param  
+     * @return    
+     */
+    public String toString() {
+        String s = super.toString();
+        return s + "\nCitizenship: "+ country;
+    }
+}
