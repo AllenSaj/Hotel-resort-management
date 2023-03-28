@@ -1,9 +1,6 @@
 
 /**
- * interface WIRE specifies requirements for 7COM1015 Cwk 2 - Nov 2022
- * 
- * @author A.Marczyk 
- * @version 05/11/22
+ * interface WIRE
  */
 public interface WIRE {
     /**
