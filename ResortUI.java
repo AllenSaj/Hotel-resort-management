@@ -1,13 +1,9 @@
-import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 /**
  * Write a description of class ResortUI here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 
 public class ResortUI extends JFrame implements ActionListener {
