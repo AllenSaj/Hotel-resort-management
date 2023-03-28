@@ -147,7 +147,7 @@ import java.awt.event.*;
         int trav = Integer.parseInt(((JTextField) fields[1]).getText());
         String ferry = ((JTextField) fields[3]).getText();
         if (wayward.canTravel(trav,ferry)) { return ("\nCard can travel\n"); }
-        else { return ("\nCard cannot travel\n"); }
+        else { return (wayward.travel(trav,ferry)); }
     }
     
     private String travelNow() {

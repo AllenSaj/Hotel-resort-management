@@ -26,9 +26,8 @@ public class Ferry {
     
     public boolean canTravel(Card c) {
         if (c.getLuxRating() >= whereTo.getLuxRating() && c.getCredits() >= 3 
-        && whereTo.checkSpace() && whereFrom.findCard(c.getIdNo()) > -1) {
-            return true;
-        } return false;
+        && whereTo.checkSpace() && whereFrom.findCard(c.getIdNo()) > -1) { return true; } 
+        return false;
     }
     
     public String travel (Card c) {
