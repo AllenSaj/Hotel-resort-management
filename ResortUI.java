@@ -31,59 +31,50 @@ import java.awt.event.*;
         buttonPanel.setLayout(new GridLayout(3, 3));
          
         // Create the buttons and add them to the button panel
-        JButton button1 = new JButton("All resorts");
-        button1.setPreferredSize(new Dimension(100, 50));
-        button1.addActionListener(this);
-        buttonPanel.add(button1);
+        for (int i = 1; i <= 9; i++) {
+            JButton button = new JButton("Button " + i);
+            button.setPreferredSize(new Dimension(50, 100));
+            button.addActionListener(this);
+            if (i == 1) { 
+                button.setText("All resorts");
+                button.setName("button"+i); 
+            }
+            else if (i == 2) { 
+                button.setText("All cards");
+                button.setName("button"+i);
+            }
+            else if (i == 3) { 
+                button.setText("Find island");
+                button.setName("button"+i);
+            }
+            else if (i == 4) { 
+                button.setText("Find card");
+                button.setName("button"+i);
+            }
+            else if (i == 5) { 
+                button.setText("Check travel");
+                button.setName("button"+i);
+            }
+            else if (i == 6) { 
+                button.setText("Travel");
+                button.setName("button"+i);
+            }
+            else if (i == 7) { 
+                button.setText("View card");
+                button.setName("button"+i);
+            }
+            else if (i == 8) { 
+                button.setText("Update credits");
+                button.setName("button"+i);
+            }
+            else if (i == 9) { 
+                button.setText("Convert points");
+                button.setName("button"+i);
+            }
 
-        JButton button2 = new JButton();
-        button2.setText("All cards");
-        button2.setPreferredSize(new Dimension(100, 50));
-        button2.addActionListener(this);
-        buttonPanel.add(button2);
-
-        JButton button3 = new JButton();
-        button3.setText("Find island");
-        button3.setPreferredSize(new Dimension(100, 50));
-        button3.addActionListener(this);
-        buttonPanel.add(button3);
-
-        JButton button4 = new JButton();
-        button4.setText("Find card");
-        button4.setPreferredSize(new Dimension(100, 50));
-        button4.addActionListener(this);
-        buttonPanel.add(button4);
-
-        JButton button5 = new JButton();
-        button5.setText("Check travel");
-        button5.setPreferredSize(new Dimension(100, 50));
-        button5.addActionListener(this);
-        buttonPanel.add(button5);
-
-        JButton button6 = new JButton();
-        button6.setText("Travel");
-        button6.setPreferredSize(new Dimension(100, 50));
-        button6.addActionListener(this);
-        buttonPanel.add(button6);
-
-        JButton button7 = new JButton();
-        button7.setText("View card");
-        button7.setPreferredSize(new Dimension(100, 50));
-        button7.addActionListener(this);
-        buttonPanel.add(button7);
-
-        JButton button8 = new JButton();
-        button8.setText("Convert points");
-        button8.setPreferredSize(new Dimension(100, 50));
-        button8.addActionListener(this);
-        buttonPanel.add(button8);
-
-        JButton button9 = new JButton();
-        button9.setText("Convert points")
-        button9.setPreferredSize(new Dimension(100, 50));
-        button9.addActionListener(this);
-        buttonPanel.add(button9);
-
+            buttonPanel.add(button);
+        }
+       
         // Create the output text area
         JTextArea textArea = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(textArea);
@@ -102,17 +93,17 @@ import java.awt.event.*;
     }
 
     public void actionPerformed(ActionEvent e){ 
-        String name = ((JButton)e.getSource()).get();
-        int choice = (name.charAt(0));
-        if      (choice == 1) { listAllResort(); }
-        else if (choice == 2) { listAllCards(); }
-        else if (choice == 3) { listOneIsland(); }
-        else if (choice == 4) { findLocationOfCard(); }
-        else if (choice == 5) { tryTravel(); }
-        else if (choice == 6) { travelNow(); }
-        else if (choice == 7) { viewCard(); }
-        else if (choice == 8) { updateCredits(); }                        
-        else if (choice == 9) { convertPts(); }
+        JButton btn = ((JButton)e.getSource());
+        String choice = btn.getName();
+        if      (choice.equals("button1")) { listAllResort(); }
+        else if (choice.equals("button2")) { listAllCards(); }
+        else if (choice.equals("button3")) { listOneIsland(); }
+        else if (choice.equals("button4")) { findLocationOfCard(); }
+        else if (choice.equals("button5")) { tryTravel(); }
+        else if (choice.equals("button6")) { travelNow(); }
+        else if (choice.equals("button7")) { viewCard(); }
+        else if (choice.equals("button8")) { updateCredits(); }                        
+        else if (choice.equals("button9")) { convertPts(); }
         else {System.out.println("Error"); }
         }
     
