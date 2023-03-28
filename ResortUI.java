@@ -14,6 +14,9 @@ import java.awt.event.*;
     private Scanner inpInt = new Scanner(System.in);
     private Scanner inpStr = new Scanner(System.in);
     private WIRE wayward = new Resort("Wayward Islands");
+    private static JTextArea textArea = new JTextArea();
+    private JScrollPane scrollPane = new JScrollPane(textArea);
+    private static JPanel mainPanel = new JPanel();
 
     public ResortUI() {
         // Set up the JFrame
@@ -23,7 +26,6 @@ import java.awt.event.*;
         setLocationRelativeTo(null);
 
         // Create the main panel
-        JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
          
         // Create the button panel
@@ -76,101 +78,107 @@ import java.awt.event.*;
         }
        
         // Create the output text area
-        JTextArea textArea = new JTextArea();
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        Font font = new Font("Verdana", Font.BOLD, 16);
+        textArea.setFont(font);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setPreferredSize(new Dimension(360, 1280));
          
-        // Add the button panel and output text area to the main panel
-        mainPanel.add(buttonPanel, BorderLayout.CENTER);
-        mainPanel.add(scrollPane, BorderLayout.EAST);
+        // Create the input panel
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new BorderLayout());
+        inputPanel.add(scrollPane, BorderLayout.CENTER);
          
-        // Add the main panel to the JFrame
-        add(mainPanel);
+        
+         // Add the button panel and input panel to the main panel
+         mainPanel.add(buttonPanel, BorderLayout.CENTER);
+         mainPanel.add(inputPanel, BorderLayout.EAST);
          
-        // Show the JFrame
-        setVisible(true);
-    }
+         // Add the main panel to the JFrame
+         add(mainPanel);
+         
+         // Show the JFrame
+         setVisible(true);
+     }
 
-    public void actionPerformed(ActionEvent e){ 
-        JButton btn = ((JButton)e.getSource());
-        String choice = btn.getName();
-        if      (choice.equals("button1")) { listAllResort(); }
-        else if (choice.equals("button2")) { listAllCards(); }
-        else if (choice.equals("button3")) { listOneIsland(); }
-        else if (choice.equals("button4")) { findLocationOfCard(); }
-        else if (choice.equals("button5")) { tryTravel(); }
-        else if (choice.equals("button6")) { travelNow(); }
-        else if (choice.equals("button7")) { viewCard(); }
+    public void actionPerformed(ActionEvent e) { 
+        String choice  = ((JButton)e.getSource()).getName();
+        String output = "";
+        if      (choice.equals("button1")) { output = listAllResort(); }
+        else if (choice.equals("button2")) { output = listAllCards(); }
+        else if (choice.equals("button3")) {  output = listOneIsland(); }
+        else if (choice.equals("button4")) { output = findLocationOfCard(); }
+        else if (choice.equals("button5")) { output = tryTravel(); }
+        else if (choice.equals("button6")) { output = travelNow(); }
+        else if (choice.equals("button7")) { output = viewCard(); }
         else if (choice.equals("button8")) { updateCredits(); }                        
         else if (choice.equals("button9")) { convertPts(); }
         else {System.out.println("Error"); }
-        }
-    
 
-    private void listAllResort() { System.out.println(wayward.toString()); }
+        textArea.setText(output);
+        }
+        
+
+    private String listAllResort() { return (wayward.toString()); }
     
-    private void listAllCards() { System.out.println(wayward.getAllCardsOnAllIslands()); }
+    private String listAllCards() { return (wayward.getAllCardsOnAllIslands()); }
    
-    private void listOneIsland() {
-        System.out.println("Enter Island name (case sensitive):");
-        String name = inpStr.nextLine();
-        System.out.println(wayward.getAllCardsOnIsland(name));
+    private String listOneIsland() {
+        Object[] fields = {"Enter Island name (case sensitive):", new JTextField()};
+        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter island information", JOptionPane.OK_CANCEL_OPTION);
+        String name = ((JTextField) fields[1]).getText();
+        return (wayward.getAllCardsOnIsland(name));
     }
        
-    private void findLocationOfCard() {
-        System.out.println("Enter card ID: ");
-        int trav = inpInt.nextInt();
+    private String findLocationOfCard() {
+        Object[] fields = {"Enter card ID:", new JTextField()};
+        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+        int cardID = Integer.parseInt(((JTextField) fields[1]).getText());
         String ww = "\n--------------------------";
-        String temp = wayward.findCardLocation(trav);
+        String temp = wayward.findCardLocation(cardID);
         
-        if(temp != null) {
-            ww += "\n" + temp + "\n--------------------------";
-            System.out.println(ww);
-        }
-        else {
-            ww += "\nNo such card\n";
-            System.out.println(ww);
-        }
+        if(temp != null) { ww += temp + "\n--------------------------"; }
+        else { ww += "No such card";}
+        return (ww);
     }
     
-    private void tryTravel() {
-        System.out.println("Enter card id");
-        int trav = inpInt.nextInt();
-        System.out.println("Enter ferry code");
-        String ferry = inpStr.nextLine();
-        if (wayward.canTravel(trav,ferry)) { System.out.println("\nCard can travel\n"); }
-        else { System.out.println("\nCard cannot travel\n"); }
+    private String tryTravel() {
+        Object[] fields = {"Enter card ID:", new JTextField(),"Enter ferry code", new JTextField()};
+        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card and ferry information", JOptionPane.OK_CANCEL_OPTION);
+        int trav = Integer.parseInt(((JTextField) fields[1]).getText());
+        String ferry = ((JTextField) fields[3]).getText();
+        if (wayward.canTravel(trav,ferry)) { return ("\nCard can travel\n"); }
+        else { return ("\nCard cannot travel\n"); }
     }
     
-    private void travelNow() {
-        System.out.println("Enter Card ID");
-        int trav = inpInt.nextInt();
-        System.out.println("Enter ferry code");
-        String ferry = inpStr.nextLine();
-        System.out.println("\n"+wayward.travel(trav,ferry) + "\n");
+    private String travelNow() {
+        Object[] fields = {"Enter card ID:", new JTextField(),"Enter ferry code", new JTextField()};
+        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card and ferry information", JOptionPane.OK_CANCEL_OPTION);
+        int trav = Integer.parseInt(((JTextField) fields[1]).getText());
+        String ferry = ((JTextField) fields[3]).getText();
+        return (wayward.travel(trav,ferry));
     }
     
-    private void viewCard() {
-        System.out.println("Enter card ID number");
-        int cId = inpInt.nextInt();
-        System.out.println(wayward.viewACard(cId));
+    private String viewCard() {
+        Object[] fields = {"Enter card ID:", new JTextField()};
+        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+        int cId = Integer.parseInt(((JTextField) fields[1]).getText());
+        return (wayward.viewACard(cId));
     }
      
     private void updateCredits() {
-        System.out.println("Enter Card Id: ");
-        int id = inpInt.nextInt();
-        System.out.println("Enter Top up amount: ");
-        int topup = inpInt.nextInt();
-        wayward.topUpCredits(id, topup);
+        Object[] fields = {"Enter card ID:", new JTextField(),"Enter top-up amount:", new JTextField()};
+        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card and top-up information", JOptionPane.OK_CANCEL_OPTION);
+        int cId = Integer.parseInt(((JTextField) fields[1]).getText());
+        int topup = Integer.parseInt(((JTextField) fields[3]).getText());
+        wayward.topUpCredits(cId, topup);
     }
          
     private void convertPts() {
-        System.out.println("Enter card ID number");
-        int cId = inpInt.nextInt();
+        Object[] fields = {"Enter card ID:", new JTextField()};
+        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+        int cId = Integer.parseInt(((JTextField) fields[1]).getText());
         wayward.convertPoints(cId);
     }   
-
 
     public static void main(String[] args) { ResortUI GUI = new ResortUI(); }
  }

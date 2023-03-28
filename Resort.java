@@ -70,7 +70,7 @@ public class Resort implements WIRE {  // do not change this header
     public String viewACard(int cd) {
         for (Island isl : allIslands) {       
             Card c = isl.getCard(cd);
-            if (c != null) { return "--------------------------"+c.toString();            }
+            if (c != null) { return c.toString();            }
         } return "Not found";
     }
     
