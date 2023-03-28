@@ -194,7 +194,9 @@ public class Resort implements WIRE {  // do not change this header
         Card c7 = new Card(1006, "Raj", 4, 5);
         Card c8 = new Card(1007, "Sol", 7, 20);
         Card c9 = new Card(1008, "Tel", 6, 30);
-        Collections.addAll(allCards, c1,c2,c3,c4,c5,c6,c7,c8,c9);
+        Card c10 = new Card(1009, "Ana", 10, 69);
+        Card c11 = new Card(1010, "Allen", 10, 69);
+        Collections.addAll(allCards, c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11);
         
         i.enter(c1);
         i.enter(c2);
@@ -205,6 +207,8 @@ public class Resort implements WIRE {  // do not change this header
         i.enter(c7);
         i.enter(c8);
         i.enter(c9);
+        i.enter(c10);
+        i.enter(c11);
     }
     
     private Island loadIslandsAndFerries() {
@@ -213,7 +217,8 @@ public class Resort implements WIRE {  // do not change this header
         Island bo = new Island(2, "Bounty", 0, 100);
         Island tw = new Island(3, "Twirl", 0, 100);
         Island ae = new Island(4, "Aero", 0, 100);
-        Collections.addAll(allIslands,ba,yo,bo,tw,ae);
+        Island lo = new Island(5, "Love", 10, 2);
+        Collections.addAll(allIslands,ba,yo,bo,tw,ae,lo);
         
         Ferry f1 = new Ferry("ABC1", ba, yo);
         Ferry f2 = new Ferry("BCD2", yo, ba);
@@ -223,7 +228,9 @@ public class Resort implements WIRE {  // do not change this header
         Ferry f6 = new Ferry("GHJ6", yo, ae);
         Ferry f7 = new Ferry("HJK7", ae, yo);
         Ferry f8 = new Ferry("JKL8", bo, tw);
-        Collections.addAll(allFerries,f1,f2,f3,f4,f5,f6,f7,f8);
+        Ferry f9 = new Ferry("KLM9", ba, lo);
+
+        Collections.addAll(allFerries,f1,f2,f3,f4,f5,f6,f7,f8,f9);
         
         return ba;
     }

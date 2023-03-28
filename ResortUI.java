@@ -10,13 +10,11 @@ import java.awt.event.*;
  * @version (a version number or a date)
  */
 
- public class ResortUI extends JFrame implements ActionListener {
-    private Scanner inpInt = new Scanner(System.in);
-    private Scanner inpStr = new Scanner(System.in);
+public class ResortUI extends JFrame implements ActionListener {
     private WIRE wayward = new Resort("Wayward Islands");
-    private static JTextArea textArea = new JTextArea();
     private JScrollPane scrollPane = new JScrollPane(textArea);
     private static JPanel mainPanel = new JPanel();
+    private static JTextArea textArea = new JTextArea();
 
     public ResortUI() {
         // Set up the JFrame
@@ -88,17 +86,16 @@ import java.awt.event.*;
         inputPanel.setLayout(new BorderLayout());
         inputPanel.add(scrollPane, BorderLayout.CENTER);
          
-        
-         // Add the button panel and input panel to the main panel
-         mainPanel.add(buttonPanel, BorderLayout.CENTER);
-         mainPanel.add(inputPanel, BorderLayout.EAST);
+        // Add the button panel and input panel to the main panel
+        mainPanel.add(buttonPanel, BorderLayout.CENTER);
+        mainPanel.add(inputPanel, BorderLayout.EAST);
          
-         // Add the main panel to the JFrame
-         add(mainPanel);
+        // Add the main panel to the JFrame
+        add(mainPanel);
          
-         // Show the JFrame
-         setVisible(true);
-     }
+        // Show the JFrame
+        setVisible(true);
+    }
 
     public void actionPerformed(ActionEvent e) { 
         String choice  = ((JButton)e.getSource()).getName();
@@ -133,12 +130,10 @@ import java.awt.event.*;
         Object[] fields = {"Enter card ID:", new JTextField()};
         int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
         int cardID = Integer.parseInt(((JTextField) fields[1]).getText());
-        String ww = "\n--------------------------";
         String temp = wayward.findCardLocation(cardID);
         
-        if(temp != null) { ww += temp + "\n--------------------------"; }
-        else { ww += "No such card";}
-        return (ww);
+        if(temp != null) { return temp; }
+        else { return  "No such card";}
     }
     
     private String tryTravel() {
