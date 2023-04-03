@@ -17,7 +17,7 @@ public class Island {
     private int luxRating;
     private int cap;
     private ArrayList<Card> CardList = new ArrayList<Card>();
-    private static int nextIdNo = 0;
+    public static int nextIdNo = 6;
     
     public Island(String n, int l, int c) {
         this.idNo = nextIdNo;

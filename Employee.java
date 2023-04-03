@@ -17,8 +17,7 @@ public class Employee extends Card {
      */
     public Employee(int id,int eid, String nm, String jobD) {
         // initialise instance variables
-        super(id,nm);
-        this.luxRating = 10;
+        super(nm,10);
         this.employeeId = eid;
         this.jobDesc = jobD;
         this.credits = 0;

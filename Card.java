@@ -11,6 +11,7 @@ public class Card {
     private int luxRating;
     private int credits;
     private int journeyPts;
+    public static int nextIdNo = 1011;
     
     /**
      * Constructors for objects of class Card
@@ -33,9 +34,13 @@ public class Card {
         this.journeyPts = 0;
     }
     
-    public Card (int id,String name) {
-        this.idNo = id;
+    public Card (String name, int luxRating) {
+        this.idNo = nextIdNo;
         this.name = name;
+        this.luxRating = luxRating;
+        this.credits = 0;
+        this.journeyPts = 0;
+        nextIdNo ++ ;
     }
     
 
@@ -86,6 +91,7 @@ public class Card {
     public void addJourneyPts(int j) { journeyPts += j; }
     
     public void deductJourneyPts(int j) { journeyPts -= j; }
+
     
     public void useFerry() {
         deductCredits(3);

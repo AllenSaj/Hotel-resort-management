@@ -28,7 +28,7 @@ public class ResortUI extends JFrame implements ActionListener {
         buttonPanel.setLayout(new GridLayout(3, 3));
          
         // Create the buttons and add them to the button panel
-        for (int i = 1; i <= 11; i++) {
+        for (int i = 1; i <= 12; i++) {
             JButton button = new JButton("Button " + i);
             button.setPreferredSize(new Dimension(50, 100));
             button.addActionListener(this);
@@ -43,6 +43,7 @@ public class ResortUI extends JFrame implements ActionListener {
             else if (i == 9) { button.setText("Update credits"); }
             else if (i == 10) { button.setText("Convert points"); }
             else if (i == 11) { button.setText("Add Card"); }
+            else if (i == 12) { button.setText("Add Island");}
             
             button.setName("button"+i);
             buttonPanel.add(button);
@@ -84,6 +85,7 @@ public class ResortUI extends JFrame implements ActionListener {
         else if (choice.equals("button9")) { updateCredits(); }                        
         else if (choice.equals("button10")) { convertPts(); }
         else if (choice.equals("button11")) { addCard(); }
+        else if (choice.equals("button12")) { addIsland(); }
         else {System.out.println("Error"); }
 
         textArea.setText(output);
@@ -153,17 +155,21 @@ public class ResortUI extends JFrame implements ActionListener {
     }   
 
     private void addCard() {
-        Object[] fields = {"Enter card ID:", new JTextField(), "Enter card name", new JTextField(), "Enter luxury rating:", new JTextField()};
+        Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField()};
         int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
-        Card card = new Card(Integer.parseInt(((JTextField) fields[1]).getText()), ((JTextField) fields[3]).getText(), Integer.parseInt(((JTextField) fields[5]).getText()));
+        Card card = new Card(((JTextField) fields[3]).getText(), Integer.parseInt(((JTextField) fields[5]).getText()));
         ArrayList<Island> iList = wayward.getIslandList();
         ArrayList<Card> cList = wayward.getCardList();
         iList.get(0).enter(card);
-        //cList.add(card);
+        cList.add(card);
     }
 
     private void addIsland() {
-
+        Object[] fields = {"Enter Island name", new JTextField(), "Enter luxury rating:", new JTextField(), "Enter capacity", new JTextField()};
+        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter island information", JOptionPane.OK_CANCEL_OPTION);
+        Island isl = new Island(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()), Integer.parseInt(((JTextField) fields[5]).getText()));
+        ArrayList<Island> iList = wayward.getIslandList();
+        iList.add(isl);
     }
     public static void main(String[] args) { ResortUI GUI = new ResortUI(); }
  }
