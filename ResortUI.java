@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 /**
  * Write a description of class ResortUI here.
@@ -27,47 +28,22 @@ public class ResortUI extends JFrame implements ActionListener {
         buttonPanel.setLayout(new GridLayout(3, 3));
          
         // Create the buttons and add them to the button panel
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 10; i++) {
             JButton button = new JButton("Button " + i);
             button.setPreferredSize(new Dimension(50, 100));
             button.addActionListener(this);
-            if (i == 1) { 
-                button.setText("All resorts");
-                button.setName("button"+i); 
-            }
-            else if (i == 2) { 
-                button.setText("All cards");
-                button.setName("button"+i);
-            }
-            else if (i == 3) { 
-                button.setText("Find island");
-                button.setName("button"+i);
-            }
-            else if (i == 4) { 
-                button.setText("Find card");
-                button.setName("button"+i);
-            }
-            else if (i == 5) { 
-                button.setText("Check travel");
-                button.setName("button"+i);
-            }
-            else if (i == 6) { 
-                button.setText("Travel");
-                button.setName("button"+i);
-            }
-            else if (i == 7) { 
-                button.setText("View card");
-                button.setName("button"+i);
-            }
-            else if (i == 8) { 
-                button.setText("Update credits");
-                button.setName("button"+i);
-            }
-            else if (i == 9) { 
-                button.setText("Convert points");
-                button.setName("button"+i);
-            }
-
+            if (i == 1) { button.setText("All resorts"); }
+            else if (i == 2) { button.setText("All cards"); }
+            else if (i == 3) { button.setText("Find island"); }
+            else if (i == 4) { button.setText("Find card"); }
+            else if (i == 5) { button.setText("Check travel"); }
+            else if (i == 6) { button.setText("Travel"); }
+            else if (i == 7) { button.setText("View card"); }
+            else if (i == 8) { button.setText("Update credits"); }
+            else if (i == 9) { button.setText("Convert points"); }
+            else if (i == 10) { button.setText("Add Card"); }
+            
+            button.setName("button"+i);
             buttonPanel.add(button);
         }
        
@@ -105,6 +81,7 @@ public class ResortUI extends JFrame implements ActionListener {
         else if (choice.equals("button7")) { output = viewCard(); }
         else if (choice.equals("button8")) { updateCredits(); }                        
         else if (choice.equals("button9")) { convertPts(); }
+        else if (choice.equals("button10")) { addCard(); }
         else {System.out.println("Error"); }
 
         textArea.setText(output);
@@ -171,5 +148,14 @@ public class ResortUI extends JFrame implements ActionListener {
         wayward.convertPoints(cId);
     }   
 
+    private void addCard() {
+        Object[] fields = {"Enter card ID:", new JTextField(), "Enter card name", new JTextField(), "Enter luxury rating:", new JTextField()};
+        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+        Card card = new Card(Integer.parseInt(((JTextField) fields[1]).getText()), ((JTextField) fields[3]).getText(), Integer.parseInt(((JTextField) fields[5]).getText()));
+        ArrayList<Island> iList = wayward.getIslandList();
+        ArrayList<Card> cList = wayward.getCardList();
+        iList.get(0).enter(card);
+        cList.add(card);
+    }
     public static void main(String[] args) { ResortUI GUI = new ResortUI(); }
  }

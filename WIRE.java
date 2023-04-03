@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * interface WIRE
@@ -35,7 +36,14 @@ public interface WIRE {
      * @return id number of island
      */
     public int getIslandNumber(String isl);
-                
+    
+    /** Return the island array list
+     * @return Island that matches the id inputted
+     */
+    public ArrayList<Island> getIslandList();
+
+    public ArrayList<Card> getCardList();
+
     /**Returns a String representation of all the cards on a specified island
      * @param isl - the name of the island
      * @return a String representation of all cards on specified island

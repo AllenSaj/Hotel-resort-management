@@ -2,9 +2,6 @@ import java.util.Collections;
 import java.util.ArrayList;
 
 /**This class implements the WIRE interface
- *
- * @author A.A.Marczyk 
- * @version 05/11/22
  **/
 public class Resort implements WIRE {  // do not change this header
     private String location;
@@ -13,14 +10,12 @@ public class Resort implements WIRE {  // do not change this header
     private ArrayList<Ferry> allFerries = new ArrayList<Ferry>();
     
     /** constructor
-     * Some code has been provided 
+     * 
      */
     public Resort(String loc) {
         location = loc;
         Island ba = loadIslandsAndFerries();
         loadCards(ba);
-        // Ensure all cards are added to Base Island
-        // you may do this here or in one of the above method
     }
     
     /**
@@ -84,6 +79,10 @@ public class Resort implements WIRE {  // do not change this header
             if (i.getName().equals(isl)) { return i.getIdNo(); }
         } return -1;
     }
+
+    public ArrayList<Island> getIslandList() { return allIslands; }
+
+    public ArrayList<Card> getCardList() {return allCards;}
                 
     /**Returns a String representation of all cards on a specified island
      * @param isl - the name of the island
@@ -184,7 +183,7 @@ public class Resort implements WIRE {  // do not change this header
         }   
     } 
 
-    private void loadCards(Island i) {
+    public void loadCards(Island i) {
         Card c1 = new Card(1000, "Lynn", 5, 10);
         Card c2 = new Card(1001, "May", 3, 30);
         Card c3 = new Card(1002, "Nils", 10, 0);
@@ -211,7 +210,7 @@ public class Resort implements WIRE {  // do not change this header
         i.enter(c11);
     }
     
-    private Island loadIslandsAndFerries() {
+    public Island loadIslandsAndFerries() {
         Island ba = new Island(0, "Base", 0, 100);
         Island yo = new Island(1, "Yorkie", 0, 100);
         Island bo = new Island(2, "Bounty", 0, 100);
