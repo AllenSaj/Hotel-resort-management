@@ -17,10 +17,11 @@ public class Tourist extends Card {
     /**
      * Constructor for objects of class Tourist
      */
-    public Tourist(int id, String name, int luxRating, int creds, String cntry) {
+    public Tourist(String name, int luxRating, int creds, String cntry) {
         // initialise instance variables
-        super(id, name, luxRating, creds);
+        super(name, luxRating);
         this.country = cntry;
+        this.credits = creds;
     }
 
     public int getIdNo() { return super.getIdNo(); }

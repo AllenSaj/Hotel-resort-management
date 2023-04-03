@@ -16,9 +16,9 @@ public class Business extends Card {
     /**
      * Constructor for objects of class Tourist
      */
-    public Business(int id, String name, int luxRating) {
+    public Business( String name, int luxRating) {
         // initialise instance variables
-        super(id, name, luxRating);
+        super(name, luxRating);
         this.journeyPts = 0;
         this.credits = 30;
         this.loyaltyPts = 20;

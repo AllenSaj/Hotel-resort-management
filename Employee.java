@@ -11,17 +11,19 @@ public class Employee extends Card {
     private int journeyPts;
     private int employeeId;
     private String jobDesc;
+    public static int nextEmployeeIdNo = 2000;
     
     /**
      * Constructor for objects of class Employee
      */
-    public Employee(int id,int eid, String nm, String jobD) {
+    public Employee(String nm, String jobD) {
         // initialise instance variables
         super(nm,10);
-        this.employeeId = eid;
+        this.employeeId = nextEmployeeIdNo;
         this.jobDesc = jobD;
         this.credits = 0;
         this.journeyPts = 0;
+        nextEmployeeIdNo ++;
     }
 
     public int getIdNo() { return super.getIdNo(); }
@@ -70,7 +72,10 @@ public class Employee extends Card {
     
     public void deductJourneyPts(int j) { super.deductJourneyPts(j); }
     
-    public void useFerry() { super.addJourneyPts(1); }
+    public void useFerry() { 
+        super.useFerry();
+        super.addJourneyPts(1); 
+    }
     
     public void convertPts() { super.convertPts(); }
     
