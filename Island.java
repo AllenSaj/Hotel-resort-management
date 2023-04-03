@@ -44,7 +44,7 @@ public class Island {
     
     public int getCap() { return cap; }
     
-    public ArrayList getCardList() { return CardList; }
+    public ArrayList<Card> getCardList() { return CardList; }
     
     public String getAllCardsAsString() {
         String temp = "";

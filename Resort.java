@@ -47,6 +47,14 @@ public class Resort implements WIRE {  // do not change this header
         s+="\n--------------------------";
         return s;
     } 
+
+    public String getAllCards() {
+        String s = "\nAll Cards\n--------------------------";
+        for (int i = 0; i<allCards.size(); i++) {
+            s += "\n" + allCards.get(i).toString();
+        }
+        return s;
+    } 
  
     /**Returns the name of the island which contains the specified card or "Not found"
      * @param cd -the id of the card
@@ -102,7 +110,14 @@ public class Resort implements WIRE {  // do not change this header
         return s;
     } 
 
-    
+    public String getAllCardsAsString() {
+        String s = "\nAll Cards\n--------------------------";
+        for (int i = 0; i<allCards.size(); i++) {
+            s += "\n" + allCards.get(i).toString();
+        }
+        return s;
+    }
+
      /**Returns true if a Card is allowed to journey using a ferry, false otherwise
      * A journey can be made if:  
      * the rating of the card  >= the rating of the destination island

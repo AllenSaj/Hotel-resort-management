@@ -18,6 +18,8 @@ public interface WIRE {
      **/
     public String getAllCardsOnAllIslands();
     
+    public String getAllCardsAsString();
+
     /**Returns the name of the island which contains the specified card or "Not found"
      * @param cd - the id of the card
      * @return the name of the island which contains the card, or "Not found"
@@ -43,6 +45,7 @@ public interface WIRE {
     public ArrayList<Island> getIslandList();
 
     public ArrayList<Card> getCardList();
+
 
     /**Returns a String representation of all the cards on a specified island
      * @param isl - the name of the island
