@@ -11,7 +11,7 @@ public class Employee extends Card {
     private int journeyPts;
     private int employeeId;
     private String jobDesc;
-    public static int nextEmployeeIdNo = 2000;
+    public static int nextEmployeeIdNo = 5000;
     
     /**
      * Constructor for objects of class Employee
