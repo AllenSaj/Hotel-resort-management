@@ -88,9 +88,16 @@ public class Resort implements WIRE {  // do not change this header
         } return -1;
     }
 
+    public Island getIsland(String name) {
+        for (Island i: allIslands) {
+            if (i.getName().equals(name)) { return i;}
+        }return null;
+    } 
     public ArrayList<Island> getIslandList() { return allIslands; }
 
-    public ArrayList<Card> getCardList() {return allCards;}
+    public ArrayList<Card> getCardList() { return allCards; }
+
+    public ArrayList<Ferry> getFerryList() { return allFerries; }
                 
     /**Returns a String representation of all cards on a specified island
      * @param isl - the name of the island
@@ -197,6 +204,40 @@ public class Resort implements WIRE {  // do not change this header
             if (c.getIdNo() == id) { c.convertPts(); }
         }   
     } 
+
+    public void makeFerry (Island from, Island to) {
+        Ferry fer = new Ferry(from, to);
+        allFerries.add(fer);
+    }
+
+    public void makeIsland (String name, int lux, int cap) {
+        Island isl = new Island(name, lux, cap);
+        allIslands.add(isl);
+    }
+
+    public void makeBusinessCard(String name, int lux) {
+        Business card = new Business(name, lux);
+        allCards.add(card);
+        allIslands.get(0).enter(card);
+    }
+
+    public void makeEmployeeCard(String name, String jobDesc) {
+        Employee card = new Employee(name, jobDesc);
+        allCards.add(card);
+        allIslands.get(0).enter(card);
+    }
+
+    public void makeTouristCard(String name, int luxRating, int creds, String cntry) {
+        Tourist card = new Tourist(name, luxRating, creds, cntry);
+        allCards.add(card);
+        allIslands.get(0).enter(card);
+    }
+
+    public void makeCard(String name, int lux) {
+        Card card = new Card(name, lux);
+        allCards.add(card);
+        allIslands.get(0).enter(card);
+    }
 
     public void loadCards(Island i) {
         Card c1 = new Card(1000, "Lynn", 5, 10);

@@ -11,11 +11,21 @@ public class Ferry {
     private String code;
     private Island whereFrom;
     private Island whereTo;
-    
+    private static String nextCode = "LMN";
+    private static int nextID = 10;
+
     public Ferry(String c, Island from, Island to) {
         code = c;
         whereFrom = from;
         whereTo = to;
+    }
+
+    public Ferry(Island from, Island to) {
+        code = nextCode + nextID;
+        whereFrom = from;
+        whereTo = to;
+        nextID ++;
+        nextCode = nextCode();
     }
     
     public Island getSource() { return whereFrom; }
@@ -43,5 +53,17 @@ public class Ferry {
         else if (whereFrom.findCard(c.getIdNo()) == -1) { return "Cannot travel: Card not at ferry source"; }
         return "Unknown error";
     }
+
+    private String nextCode() {
+        char[] code = nextCode.toCharArray();
+            for (int j = 0 ; j < code.length; j++) {
+                int i = code[j] + 1;
+                if (code[j] == 'Z') {
+                    i = i - 26;
+                }
+                code[j] = (char)i;
+            }
+            return  code.toString();
+        }
 }
 

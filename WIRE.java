@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 /**
  * interface WIRE
@@ -42,10 +41,7 @@ public interface WIRE {
     /** Return the island array list
      * @return Island that matches the id inputted
      */
-    public ArrayList<Island> getIslandList();
-
-    public ArrayList<Card> getCardList();
-
+    public Island getIsland(String name);
 
     /**Returns a String representation of all the cards on a specified island
      * @param isl - the name of the island
@@ -95,4 +91,15 @@ public interface WIRE {
      */
     public void convertPoints(int id); 
     
+    public void makeFerry (Island from, Island to);
+
+    public void makeIsland (String name, int lux, int cap);
+
+    public void makeBusinessCard(String name, int lux);
+
+    public void makeEmployeeCard(String name, String jobDesc);
+
+    public void makeTouristCard(String name, int luxRating, int creds, String cntry);
+
+    public void makeCard(String name, int lux);
 }

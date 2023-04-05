@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -166,43 +165,55 @@ public class ResortUI extends JFrame implements ActionListener {
     }   
 
     private void addCard() {
-        ArrayList<Island> iList = wayward.getIslandList();
-        ArrayList<Card> cList = wayward.getCardList();
-        String[] typeList = {"Employee", "Business", "Tourist"};
+        String[] typeList = {"Employee", "Business", "Tourist", "Generic"};
         Object type = JOptionPane.showInputDialog(mainPanel, "Choose card type", "Card type", JOptionPane.QUESTION_MESSAGE, null, typeList, typeList[0]);
         String option = type.toString();
 
         if (option.equals("Employee")) { 
             Object[] fields = {"Enter card name", new JTextField(), "Enter job description:", new JTextField()}; 
             int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
-            Employee card = new Employee(((JTextField) fields[1]).getText(), ((JTextField) fields[3]).getText());
-            iList.get(0).enter(card);
-            cList.add(card);
+            wayward.makeEmployeeCard(((JTextField) fields[1]).getText(), ((JTextField) fields[3]).getText());
         }
 
         else if (option.equals("Business")) { 
             Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField()}; 
             int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
-            Business card = new Business(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()));
-            iList.get(0).enter(card);
-            cList.add(card);
+            wayward.makeBusinessCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()));
         }
 
         else if (option.equals("Tourist")) { 
             Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField(), "Enter country of origin:", new JTextField(), "Enter starting balance:", new JTextField()}; 
             int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
-            Tourist card = new Tourist(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()),   Integer.parseInt(((JTextField) fields[7]).getText()), ((JTextField) fields[5]).getText());
-            iList.get(0).enter(card);
-            cList.add(card);
+            wayward.makeTouristCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()),   Integer.parseInt(((JTextField) fields[7]).getText()), ((JTextField) fields[5]).getText());
+        }
+
+        else if (option.equals("Generic")) {
+            Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField()};
+            int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+            wayward.makeCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()));
         }
     }
 
     private void addIsland() {
         Object[] fields = {"Enter Island name", new JTextField(), "Enter luxury rating:", new JTextField(), "Enter capacity", new JTextField()};
         int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter island information", JOptionPane.OK_CANCEL_OPTION);
-        Island isl = new Island(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()), Integer.parseInt(((JTextField) fields[5]).getText()));
-        ArrayList<Island> iList = wayward.getIslandList();
-        iList.add(isl);
+        String name = ((JTextField) fields[1]).getText(); 
+        wayward.makeIsland(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()), Integer.parseInt(((JTextField) fields[5]).getText()));
+       
+        String[] options = {"Yes, Ferry to and from", "Yes, Ferry to", "Yes, Ferry from", "No"};
+        int input = JOptionPane.showOptionDialog(mainPanel, "Island Created, Do you want to create Ferry to travel to Island", "Ferry creation",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        
+        if (input != 3) {
+            Object[] fields2 = {"Enter connecting Island name (case sensitive)", new JTextField()};
+            int optionResult2 = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter ferry information", JOptionPane.OK_CANCEL_OPTION);
+            if (input == 0) {
+                wayward.makeFerry(wayward.getIsland(((JTextField) fields[1]).getText()), wayward.getIsland(name));
+                wayward.makeFerry(wayward.getIsland(name), wayward.getIsland(((JTextField) fields[1]).getText()));
+            }
+            else if (input == 1) { wayward.makeFerry(wayward.getIsland(((JTextField) fields[1]).getText()), wayward.getIsland(name)); }
+            else if (input == 2) { wayward.makeFerry(wayward.getIsland(name), wayward.getIsland(((JTextField) fields[1]).getText())); }
+        }
     }
+
     public static void main(String[] args) { ResortUI GUI = new ResortUI(); }
  }
