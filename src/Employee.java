@@ -3,7 +3,6 @@
  * Write a description of class Employee here.
  */
 public class Employee extends Card {
-    // instance variables - replace the example below with your own
     private int idNo;
     private String name;
     private int luxRating;
@@ -13,11 +12,7 @@ public class Employee extends Card {
     private String jobDesc;
     public static int nextEmployeeIdNo = 5000;
     
-    /**
-     * Constructor for objects of class Employee
-     */
     public Employee(String nm, String jobD) {
-        // initialise instance variables
         super(nm,10);
         this.employeeId = nextEmployeeIdNo;
         this.jobDesc = jobD;
@@ -86,7 +81,6 @@ public class Employee extends Card {
      * @return    
      */
     public String toString() {
-        // put your code here
         String s = super.toString();
         s += "\nEmployee ID: "+employeeId + "\nJob Description: "+jobDesc;
         return s;

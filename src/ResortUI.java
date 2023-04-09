@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- * Write a description of class ResortUI here.
+ * ResortUI creates a GUI for the resort class with buttons that perform all the defined funcitons in the interface.
  */
 
 public class ResortUI extends JFrame implements ActionListener {
@@ -34,7 +34,7 @@ public class ResortUI extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // setting pa
+        // setting panel layouts
         mainPanel.setLayout(new BorderLayout());
         buttonPanel.setLayout(new GridLayout(3, 3));
         adminButtonPanel.setLayout(new GridLayout(3, 1));
@@ -87,6 +87,7 @@ public class ResortUI extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    //Action listener to link buttons to relevant functions
     public void actionPerformed(ActionEvent e) { 
         String choice  = ((JButton)e.getSource()).getName();
         String output = "";
@@ -100,7 +101,7 @@ public class ResortUI extends JFrame implements ActionListener {
         else if (choice.equals("button8")) { output = viewCard(); }
         else if (choice.equals("button9")) { updateCredits(); }                        
         else if (choice.equals("button10")) { convertPts(); }
-        else if (choice.equals("button11")) { openAdminPanel(); }
+        else if (choice.equals("button11")) { adminButtonPanel.setVisible(!adminButtonPanel.isVisible()); }
         else if (choice.equals("button12")) { addCard(); }
         else if (choice.equals("button13")) { addIsland(); }
         else if (choice.equals("button14")) { addFerry(); }
@@ -109,7 +110,6 @@ public class ResortUI extends JFrame implements ActionListener {
         textArea.setText(output);
         }
         
-
     private String resortInfo() { return (wayward.toString()); }
     
     private String listAllCards() { return (wayward.getAllCardsAsString()); }
@@ -169,9 +169,7 @@ public class ResortUI extends JFrame implements ActionListener {
         int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
         wayward.convertPoints( Integer.parseInt(((JTextField) fields[1]).getText()));
         textArea.setText("ID:{cId} journey points converted");
-    }   
-
-    private void openAdminPanel () { adminButtonPanel.setVisible(!adminButtonPanel.isVisible()); }
+    } 
 
     private void addCard() {
         String[] typeList = {"Employee", "Business", "Tourist", "Generic"};

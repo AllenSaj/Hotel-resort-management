@@ -1,7 +1,8 @@
 import java.util.Collections;
 import java.util.ArrayList;
 
-/**This class implements the ResortInterface interface
+/**
+ * This class implements the ResortInterface interface and loads the inital island design
  **/
 public class Resort implements ResortInterface { 
     private String location;

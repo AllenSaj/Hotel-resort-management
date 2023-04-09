@@ -1,14 +1,10 @@
 import java.util.ArrayList;
 /**
- * An island is part of a WIRE resort.Each island has a name,  a luxury rating
+ * An island is part of a resort.Each island has a name,  a luxury rating
  * and a capacity which represents the maximum number of people(cards) who can be on the  
  * island at any one time. Each island must maintain a list of all people (cards)
  * currently on the island. These lists are updated whenever cards enter or leave 
  * an island,so that it is always possible to say which (cards) are on the island 
- * 
- * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 
 public class Island {

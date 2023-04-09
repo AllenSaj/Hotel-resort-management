@@ -1,12 +1,8 @@
 
 /**
  * Write a description of class Tourist here.
- *
- * @author (your name)
- * @version (a version number or a date)
  */
 public class Tourist extends Card {
-    // instance variables - replace the example below with your own
     private int idNo;
     private String name;
     private int luxRating;
@@ -14,9 +10,6 @@ public class Tourist extends Card {
     private int journeyPts;
     private String country;
 
-    /**
-     * Constructor for objects of class Tourist
-     */
     public Tourist(String name, int luxRating, int creds, String cntry) {
         // initialise instance variables
         super(name, luxRating);
