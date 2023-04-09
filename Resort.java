@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 /**This class implements the WIRE interface
  **/
-public class Resort implements WIRE {  // do not change this header
+public class Resort implements ResortInterface {  // do not change this header
     private String location;
     private ArrayList<Card> allCards = new ArrayList<Card>();
     private ArrayList<Island> allIslands = new ArrayList<Island>();
