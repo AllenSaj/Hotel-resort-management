@@ -1,9 +1,9 @@
 import java.util.Collections;
 import java.util.ArrayList;
 
-/**This class implements the WIRE interface
+/**This class implements the ResortInterface interface
  **/
-public class Resort implements ResortInterface {  // do not change this header
+public class Resort implements ResortInterface { 
     private String location;
     private ArrayList<Card> allCards = new ArrayList<Card>();
     private ArrayList<Island> allIslands = new ArrayList<Island>();

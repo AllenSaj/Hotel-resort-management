@@ -1,6 +1,6 @@
 
 /**
- * interface WIRE
+ * interface ResortInterface
  */
 public interface ResortInterface {
     /**
