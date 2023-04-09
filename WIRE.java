@@ -2,7 +2,7 @@
 /**
  * interface WIRE
  */
-public interface WIRE {
+public interface ResortInterface {
     /**
      * Returns information about the resort including its location/name and all
      * cards currently on each island, or "No cards" (if no card on that island
