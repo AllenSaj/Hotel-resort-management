@@ -205,6 +205,16 @@ public class Resort implements ResortInterface {  // do not change this header
         }   
     } 
 
+    public boolean checkFerry (Island source, Island dest) {
+        for (Ferry f: allFerries) {
+            Island s = f.getSource();
+            Island d = f.getDest(); 
+            if (s == source && d == dest) {
+                return true;
+            }
+        } return false;
+    }
+
     public void makeFerry (Island from, Island to) {
         Ferry fer = new Ferry(from, to);
         allFerries.add(fer);

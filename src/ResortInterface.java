@@ -90,6 +90,8 @@ public interface ResortInterface {
      * @param id the id of the card whose points are to be converted
      */
     public void convertPoints(int id); 
+
+    public boolean checkFerry (Island source, Island dest);
     
     public void makeFerry (Island from, Island to);
 

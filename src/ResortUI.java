@@ -229,8 +229,13 @@ public class ResortUI extends JFrame implements ActionListener {
     private void addFerry() {
         Object[] fields = {"Enter source island", new JTextField(), "Enter destination island:", new JTextField(), "Enter capacity", new JTextField()};
         int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter ferry information", JOptionPane.OK_CANCEL_OPTION);
-        wayward.makeFerry(wayward.getIsland(((JTextField) fields[1]).getText()), wayward.getIsland(((JTextField) fields[1]).getText()));
-        textArea.setText("Ferry Created");
+        Island source = wayward.getIsland(((JTextField) fields[1]).getText()); 
+        Island destination = wayward.getIsland(((JTextField) fields[3]).getText());
+        if (wayward.checkFerry(source, destination) == true) { textArea.setText("Error: Ferry already exists"); }
+        else { 
+            wayward.makeFerry(source, destination);
+            textArea.setText("Ferry Created");
+        }
     }
 
     public static void main(String[] args) { ResortUI GUI = new ResortUI(); }
