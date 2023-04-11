@@ -3,18 +3,12 @@
  * Write a description of class Tourist here.
  */
 public class Tourist extends Card {
-    private int idNo;
-    private String name;
-    private int luxRating;
-    private int credits;
-    private int journeyPts;
     private String country;
 
     public Tourist(String name, int luxRating, int creds, String cntry) {
         // initialise instance variables
-        super(name, luxRating);
+        super(name, luxRating, creds);
         this.country = cntry;
-        this.credits = creds;
     }
 
     public int getIdNo() { return super.getIdNo(); }

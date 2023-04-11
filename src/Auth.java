@@ -106,10 +106,10 @@ public class Auth implements ActionListener {
         String passConfirm = new String(password.getPassword());
         if (button == buttonLog) {
             if (credentials.get(user).equals(pass)) {
+                frameLogin.setVisible(false);
                 JOptionPane.showMessageDialog(ResortUI.frameMain, "Login Successfull");
                 this.loggedIn = true;
                 username.setText("");
-                frameLogin.setVisible(false);
                 login();
             }
             else {  JOptionPane.showMessageDialog(ResortUI.frameMain, " Username or Password mismatch ", "Login error", JOptionPane.WARNING_MESSAGE);  }

@@ -226,8 +226,8 @@ public class Resort implements ResortInterface {
         allIslands.add(isl);
     }
 
-    public void makeBusinessCard(String name, int lux) {
-        Business card = new Business(name, lux);
+    public void makeBusinessCard(String name, int lux, int creds) {
+        Business card = new Business(name, lux, creds);
         allCards.add(card);
         allIslands.get(0).enter(card);
     }
@@ -251,17 +251,17 @@ public class Resort implements ResortInterface {
     }
 
     public void loadCards(Island i) {
-        Card c1 = new Card(1000, "Lynn", 5, 10);
-        Card c2 = new Card(1001, "May", 3, 30);
-        Card c3 = new Card(1002, "Nils", 10, 0);
-        Card c4 = new Card(1003, "Olek", 1, 12);
-        Card c5 = new Card(1004, "Pan", 3, 3);
-        Card c6 = new Card(1005, "Quin", 1, 30);
-        Card c7 = new Card(1006, "Raj", 4, 5);
-        Card c8 = new Card(1007, "Sol", 7, 20);
-        Card c9 = new Card(1008, "Tel", 6, 30);
-        Card c10 = new Card(1009, "Ana", 10, 69);
-        Card c11 = new Card(1010, "Allen", 10, 69);
+        Card c1 = new Card("Lynn", 5, 10);
+        Card c2 = new Card("May", 3, 30);
+        Card c3 = new Card("Nils", 10, 0);
+        Card c4 = new Card("Olek", 1, 12);
+        Card c5 = new Card("Pan", 3, 3);
+        Card c6 = new Card( "Quin", 1, 30);
+        Card c7 = new Card("Raj", 4, 5);
+        Card c8 = new Card("Sol", 7, 20);
+        Card c9 = new Card("Tel", 6, 30);
+        Card c10 = new Card("Ana", 10, 69);
+        Card c11 = new Card("Allen", 10, 69);
         Collections.addAll(allCards, c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11);
         
         i.enter(c1);

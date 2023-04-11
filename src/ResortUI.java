@@ -193,9 +193,9 @@ public class ResortUI implements ActionListener {
         }
 
         else if (option.equals("Business")) { 
-            Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField()}; 
+            Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField(), "Enter starting balance:", new JTextField()}; 
             JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
-            wayward.makeBusinessCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()));
+            wayward.makeBusinessCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()), Integer.parseInt(((JTextField) fields[5]).getText()));
         }
 
         else if (option.equals("Tourist")) { 

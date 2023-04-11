@@ -3,21 +3,14 @@
  * Write a description of class Employee here.
  */
 public class Employee extends Card {
-    private int idNo;
-    private String name;
-    private int luxRating;
-    private int credits;
-    private int journeyPts;
     private int employeeId;
     private String jobDesc;
     public static int nextEmployeeIdNo = 5000;
     
     public Employee(String nm, String jobD) {
-        super(nm,10);
+        super(nm,10,0);
         this.employeeId = nextEmployeeIdNo;
         this.jobDesc = jobD;
-        this.credits = 0;
-        this.journeyPts = 0;
         nextEmployeeIdNo ++;
     }
 

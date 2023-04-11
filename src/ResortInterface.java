@@ -97,7 +97,7 @@ public interface ResortInterface {
 
     public void makeIsland (String name, int lux, int cap);
 
-    public void makeBusinessCard(String name, int lux);
+    public void makeBusinessCard(String name, int lux, int creds);
 
     public void makeEmployeeCard(String name, String jobDesc);
 

@@ -7,18 +7,19 @@ public class Card {
     private int luxRating;
     private int credits;
     private int journeyPts;
-    public static int nextIdNo = 1011;
+    public static int nextIdNo = 1000;
     
     /**
      * Constructors for objects of class Card
      */
-    public Card(int id, String name, int luxRating, int creds) {
+    public Card(String name, int luxRating, int creds) {
     //Default test card cconstructor
-        this.idNo = id;
+        this.idNo = nextIdNo;
         this.name= name;
         this.luxRating = luxRating;
         this.credits = creds;
         this.journeyPts = 0;
+        nextIdNo++;
     }
     
     public Card(int id, String name, int luxRating) {

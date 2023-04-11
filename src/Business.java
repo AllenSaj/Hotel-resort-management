@@ -3,22 +3,14 @@
  * Write a description of class Tourist here.
  */
 public class Business extends Card {
-    private int idNo;
-    private String name;
-    private int luxRating;
-    private int credits;
-    private int journeyPts;
     private int loyaltyPts;
     
     /**
      * Constructor for objects of class Tourist
      */
-    public Business( String name, int luxRating) {
-        // initialise instance variables
-        super(name, luxRating);
-        this.journeyPts = 0;
-        this.credits = 30;
-        this.loyaltyPts = 20;
+    public Business( String name, int luxRating, int creds) {
+        super(name, luxRating, creds);
+        this.loyaltyPts = 0;
     }
 
   public int getIdNo() { return super.getIdNo(); }
@@ -75,9 +67,11 @@ public class Business extends Card {
     }
     
     public void convertPts() {
-        super.convertPts();
-        credits += loyaltyPts/3;
-        loyaltyPts = journeyPts%3;
+        int journey = super.getJourneyPts();
+        super.addCredits(loyaltyPts/3);
+        loyaltyPts = loyaltyPts%3;
+        loyaltyPts += journey/3;
+        super.deductJourneyPts(journey/3);
     }
     
     /**
