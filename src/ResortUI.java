@@ -1,4 +1,3 @@
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,29 +17,31 @@ import javax.swing.JTextField;
  * ResortUI creates a GUI for the resort class with buttons that perform all the defined funcitons in the interface.
  */
 
-public class ResortUI extends JFrame implements ActionListener {
+public class ResortUI implements ActionListener {
     private ResortInterface wayward = new Resort("Wayward Islands");
+    public static JFrame frameMain = new JFrame();
     private JPanel mainPanel = new JPanel();
     private JTextArea textArea = new JTextArea();
     private JPanel inputPanel = new JPanel();
     private JPanel buttonPanel = new JPanel();
     private JScrollPane scrollPane = new JScrollPane(textArea);
     private JPanel adminButtonPanel = new JPanel();
+    private Auth login = new Auth();
 
     public ResortUI() {
         // Set up the JFrame
-        setTitle("Wayward Islands Resort");
-        setSize(1280, 720);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        frameMain.setTitle("Wayward Islands Resort");
+        frameMain.setSize(1280, 720);
+        frameMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frameMain.setLocationRelativeTo(null);
 
         // setting panel layouts
         mainPanel.setLayout(new BorderLayout());
-        buttonPanel.setLayout(new GridLayout(3, 3));
-        adminButtonPanel.setLayout(new GridLayout(3, 1));
+        buttonPanel.setLayout(new GridLayout(4, 3));
+        adminButtonPanel.setLayout(new GridLayout(4, 1));
          
         // Create the buttons and add them to the button panel
-        for (int i = 1; i <= 14; i++) {
+        for (int i = 1; i <= 16; i++) {
             JButton button = new JButton("Button " + i);
             button.addActionListener(this);
             if (i == 1) { button.setText("Resort Info"); }
@@ -54,11 +55,13 @@ public class ResortUI extends JFrame implements ActionListener {
             else if (i == 9) { button.setText("Update credits"); }
             else if (i == 10) { button.setText("Convert points"); }
             else if (i == 11) { button.setText("Admin functions"); }
-            else if (i == 12) { button.setText("Add Card"); }
-            else if (i == 13) { button.setText("Add Island"); }
-            else if (i == 14) { button.setText("Add Ferry"); }
+            else if (i == 12) { button.setText("Login/Register"); }
+            else if (i == 13) { button.setText("Add Card"); }
+            else if (i == 14) { button.setText("Add Island"); }
+            else if (i == 15) { button.setText("Add Ferry"); }
+            else if (i == 16) { button.setText("Log out"); }
             button.setName("button"+i);
-            if ( i > 11) { 
+            if ( i > 12) { 
                 adminButtonPanel.add(button);
                 button.setBackground(new Color(240,128,128)); 
             }
@@ -83,8 +86,8 @@ public class ResortUI extends JFrame implements ActionListener {
         adminButtonPanel.setVisible(false);
          
         // Add the main panel to the JFrame and set visibility
-        add(mainPanel);
-        setVisible(true);
+        frameMain.add(mainPanel);
+        frameMain.setVisible(true);
     }
 
     //Action listener to link buttons to relevant functions
@@ -101,10 +104,12 @@ public class ResortUI extends JFrame implements ActionListener {
         else if (choice.equals("button8")) { output = viewCard(); }
         else if (choice.equals("button9")) { updateCredits(); }                        
         else if (choice.equals("button10")) { convertPts(); }
-        else if (choice.equals("button11")) { adminButtonPanel.setVisible(!adminButtonPanel.isVisible()); }
-        else if (choice.equals("button12")) { addCard(); }
-        else if (choice.equals("button13")) { addIsland(); }
-        else if (choice.equals("button14")) { addFerry(); }
+        else if (choice.equals("button11")) { openAdminPanel(); }
+        else if (choice.equals("button12")) { login.logIn(); }
+        else if (choice.equals("button13")) { addCard(); }
+        else if (choice.equals("button14")) { addIsland(); }
+        else if (choice.equals("button15")) { addFerry(); }
+        else if (choice.equals("button16")) { logOut(); }
         else {System.out.println("Error"); }
 
         textArea.setText(output);
@@ -118,14 +123,14 @@ public class ResortUI extends JFrame implements ActionListener {
 
     private String listOneIsland() {
         Object[] fields = {"Enter Island name (case sensitive):", new JTextField()};
-        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter island information", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(mainPanel, fields, "Enter island information", JOptionPane.OK_CANCEL_OPTION);
         String name = ((JTextField) fields[1]).getText();
         return (wayward.getAllCardsOnIsland(name));
     }
        
     private String findLocationOfCard() {
         Object[] fields = {"Enter card ID:", new JTextField()};
-        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
         int cardID = Integer.parseInt(((JTextField) fields[1]).getText());
         String temp = wayward.findCardLocation(cardID);
         
@@ -135,7 +140,7 @@ public class ResortUI extends JFrame implements ActionListener {
     
     private String tryTravel() {
         Object[] fields = {"Enter card ID:", new JTextField(),"Enter ferry code", new JTextField()};
-        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card and ferry information", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card and ferry information", JOptionPane.OK_CANCEL_OPTION);
         int trav = Integer.parseInt(((JTextField) fields[1]).getText());
         String ferry = ((JTextField) fields[3]).getText();
         if (wayward.canTravel(trav,ferry)) { return ("\nCard can travel\n"); }
@@ -144,7 +149,7 @@ public class ResortUI extends JFrame implements ActionListener {
     
     private String travelNow() {
         Object[] fields = {"Enter card ID:", new JTextField(),"Enter ferry code", new JTextField()};
-        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card and ferry information", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card and ferry information", JOptionPane.OK_CANCEL_OPTION);
         int trav = Integer.parseInt(((JTextField) fields[1]).getText());
         String ferry = ((JTextField) fields[3]).getText();
         return (wayward.travel(trav,ferry));
@@ -152,24 +157,29 @@ public class ResortUI extends JFrame implements ActionListener {
     
     private String viewCard() {
         Object[] fields = {"Enter card ID:", new JTextField()};
-        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
         int cId = Integer.parseInt(((JTextField) fields[1]).getText());
         return (wayward.viewACard(cId));
     }
      
     private void updateCredits() {
         Object[] fields = {"Enter card ID:", new JTextField(),"Enter top-up amount:", new JTextField()};
-        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card and top-up information", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card and top-up information", JOptionPane.OK_CANCEL_OPTION);
         wayward.topUpCredits(Integer.parseInt(((JTextField) fields[1]).getText()), Integer.parseInt(((JTextField) fields[3]).getText()));
         textArea.setText("ID:{cID} topped up {topup} credits");
     }
          
     private void convertPts() {
         Object[] fields = {"Enter card ID:", new JTextField()};
-        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
         wayward.convertPoints( Integer.parseInt(((JTextField) fields[1]).getText()));
         textArea.setText("ID:{cId} journey points converted");
     } 
+
+    private void openAdminPanel() { 
+        if(login.getLoggedStatus()) { adminButtonPanel.setVisible(!adminButtonPanel.isVisible()); }
+        else { JOptionPane.showMessageDialog(null, "Please login first", "Access Denied", JOptionPane.WARNING_MESSAGE); }
+    }
 
     private void addCard() {
         String[] typeList = {"Employee", "Business", "Tourist", "Generic"};
@@ -178,25 +188,25 @@ public class ResortUI extends JFrame implements ActionListener {
 
         if (option.equals("Employee")) { 
             Object[] fields = {"Enter card name", new JTextField(), "Enter job description:", new JTextField()}; 
-            int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
             wayward.makeEmployeeCard(((JTextField) fields[1]).getText(), ((JTextField) fields[3]).getText());
         }
 
         else if (option.equals("Business")) { 
             Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField()}; 
-            int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
             wayward.makeBusinessCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()));
         }
 
         else if (option.equals("Tourist")) { 
             Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField(), "Enter country of origin:", new JTextField(), "Enter starting balance:", new JTextField()}; 
-            int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
             wayward.makeTouristCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()),   Integer.parseInt(((JTextField) fields[7]).getText()), ((JTextField) fields[5]).getText());
         }
 
         else if (option.equals("Generic")) {
             Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField()};
-            int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
             wayward.makeCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()));
         }
         textArea.setText("{option} card created");
@@ -204,7 +214,7 @@ public class ResortUI extends JFrame implements ActionListener {
 
     private void addIsland() {
         Object[] fields = {"Enter Island name", new JTextField(), "Enter luxury rating:", new JTextField(), "Enter capacity", new JTextField()};
-        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter island information", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(mainPanel, fields, "Enter island information", JOptionPane.OK_CANCEL_OPTION);
         String name = ((JTextField) fields[1]).getText(); 
         wayward.makeIsland(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()), Integer.parseInt(((JTextField) fields[5]).getText()));
         textArea.setText("Island {name} created");
@@ -213,7 +223,7 @@ public class ResortUI extends JFrame implements ActionListener {
         
         if (input != 3) {
             Object[] fields2 = {"Enter connecting Island name (case sensitive)", new JTextField()};
-            int optionResult2 = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter ferry information", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showConfirmDialog(mainPanel, fields2, "Enter ferry information", JOptionPane.OK_CANCEL_OPTION);
             if (input == 0) {
                 wayward.makeFerry(wayward.getIsland(((JTextField) fields[1]).getText()), wayward.getIsland(name));
                 wayward.makeFerry(wayward.getIsland(name), wayward.getIsland(((JTextField) fields[1]).getText()));
@@ -226,7 +236,7 @@ public class ResortUI extends JFrame implements ActionListener {
 
     private void addFerry() {
         Object[] fields = {"Enter source island", new JTextField(), "Enter destination island:", new JTextField(), "Enter capacity", new JTextField()};
-        int optionResult = JOptionPane.showConfirmDialog(mainPanel, fields, "Enter ferry information", JOptionPane.OK_CANCEL_OPTION);
+        JOptionPane.showConfirmDialog(mainPanel, fields, "Enter ferry information", JOptionPane.OK_CANCEL_OPTION);
         Island source = wayward.getIsland(((JTextField) fields[1]).getText()); 
         Island destination = wayward.getIsland(((JTextField) fields[3]).getText());
         if (wayward.checkFerry(source, destination) == true) { textArea.setText("Error: Ferry already exists"); }
@@ -234,6 +244,11 @@ public class ResortUI extends JFrame implements ActionListener {
             wayward.makeFerry(source, destination);
             textArea.setText("Ferry Created");
         }
+    }
+
+    private void logOut() {
+        login.logOut();
+        adminButtonPanel.setVisible(false);
     }
 
     public static void main(String[] args) { ResortUI GUI = new ResortUI(); }
