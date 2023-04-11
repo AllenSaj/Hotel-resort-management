@@ -17,9 +17,11 @@ public class Auth implements ActionListener {
     private JFrame frameLogin = new JFrame();
     private JFrame frameReg = new JFrame();
     private JLabel labelPass = new JLabel("Password");
+    private JLabel labelPassConfirm = new JLabel("Confirm password");
     private JLabel labelUser = new JLabel("Username");
 	private JTextField username = new JTextField(); 
     private JPasswordField password = new JPasswordField();
+    private JPasswordField passwordConfirm = new JPasswordField();
 	private JButton buttonLog  = new JButton("Login");
     private JButton buttonReg  = new JButton("Register");
     private JButton buttonCreate  = new JButton("Create account");
@@ -85,6 +87,10 @@ public class Auth implements ActionListener {
         panelReg.add(labelPass);
         password.setBounds(50, 75, 200, 28);
         panelReg.add(password);
+        labelPassConfirm.setBounds(50, 103, 200, 20);
+        panelReg.add(labelPassConfirm);
+        passwordConfirm.setBounds(50, 123, 70, 28);
+        panelReg.add(passwordConfirm);
 
         buttonCreate.setBounds(50, 110, 200, 25);
         buttonCreate.setBackground(new Color(240,128,128));
@@ -97,6 +103,7 @@ public class Auth implements ActionListener {
         JButton button = (JButton)e.getSource();
         String user = username.getText();
         String pass =  new String(password.getPassword());
+        String passConfirm = new String(password.getPassword());
         if (button == buttonLog) {
             if (credentials.get(user).equals(pass)) {
                 JOptionPane.showMessageDialog(ResortUI.frameMain, "Login Successfull");
@@ -116,6 +123,7 @@ public class Auth implements ActionListener {
 
         else if (button == buttonCreate) {
             if (user.length() == 0 || pass.length() == 0) { JOptionPane.showMessageDialog(ResortUI.frameMain, "Username and password field cannot be empty", "Registration error", JOptionPane.WARNING_MESSAGE); }
+            else if (!pass.equals(passConfirm)) { JOptionPane.showMessageDialog(ResortUI.frameMain, "Passwords must match", "Registration error", JOptionPane.WARNING_MESSAGE); }
             else if (credentials.containsKey(user) ) { JOptionPane.showMessageDialog(ResortUI.frameMain, "Username already in use: Please choose another", "Registration error", JOptionPane.WARNING_MESSAGE);  }
             else { 
                 credentials.put(user, pass);
