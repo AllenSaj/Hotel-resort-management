@@ -1,14 +1,14 @@
 
 /**
  * interface ResortInterface
- */
+ **/
 public interface ResortInterface {
     /**
      * Returns information about the resort including its location/name and all
      * cards currently on each island, or "No cards" (if no card on that island
      * @return all of the details of all islands including location 
      * and all cards currently on each island, or "No cards" if island has no cards
-     */
+     **/
     public String toString();
 
     /**Returns a String representation of all the cards on all islands
@@ -35,12 +35,12 @@ public interface ResortInterface {
      * or -1 if island does not exist
      * @param isl is the name of island
      * @return id number of island
-     */
+     **/
     public int getIslandNumber(String isl);
     
     /** Return the island array list
      * @return Island that matches the id inputted
-     */
+     **/
     public Island getIsland(String name);
 
     /**Returns a String representation of all the cards on a specified island
@@ -91,17 +91,52 @@ public interface ResortInterface {
      */
     public void convertPoints(int id); 
 
+    /** This function checks if a ferry exists already between two islands
+     * @param source the source island 
+     * @param dest the destination island
+     * @return boolean which returns true if ferry already exists, false if ferr does not
+     **/
     public boolean checkFerry (Island source, Island dest);
     
+    /** Makes a ferry with the inputted parameters, ferry code is automatically generated
+     * @param from the source island
+     * @param to the source island
+     **/
     public void makeFerry (Island from, Island to);
 
+    /** Makes an Island object with the parameters, ID automatically generated 
+     * @param name name of island
+     * @param lux luxury rating of island
+     * @param cap capacity of island
+    **/
     public void makeIsland (String name, int lux, int cap);
 
+    /** Makes a business object with inputted parameters, ID auto-generated
+     * @param name name of person getting business card
+     * @param lux luxury rating of card
+     * @param creds starting balance of card
+     */
     public void makeBusinessCard(String name, int lux, int creds);
 
+    /** Makes a employee object with inputted parameters, ID auto-generated
+     * @param name name of person getting employee card
+     * @param jobDesc job description of employee
+    */
     public void makeEmployeeCard(String name, String jobDesc);
 
+    /** Makes a tourist object with inputted parameters, ID auto-generated
+     * @param name name of tourist who is getting card
+     * @param luxRating luxury rating for card
+     * @param creds starting balance on card
+     * @param cntry country of origion of the tourist
+     */
     public void makeTouristCard(String name, int luxRating, int creds, String cntry);
 
-    public void makeCard(String name, int lux);
+    /** Makes a generic card object which is the parent class to employee,
+     * tourist and business. ID auto-generated
+     * @param name name of person who is getting card
+     * @param lux luxury rating of card
+     * @param creds starting balance of card
+     */
+    public void makeCard(String name, int lux, int creds);
 }

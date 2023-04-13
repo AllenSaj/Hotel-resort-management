@@ -85,11 +85,10 @@ public class ResortUI implements ActionListener {
         mainPanel.add(inputPanel, BorderLayout.EAST);
         mainPanel.add(adminButtonPanel, BorderLayout.WEST);
         adminButtonPanel.setVisible(false);
-         
-        // Add the main panel to the JFrame and set visibility
         frameMain.add(mainPanel);
-        frameMain.setVisible(true);
     }
+
+    public void run () { frameMain.setVisible(true); }
 
     //Action listener to link buttons to relevant functions
     public void actionPerformed(ActionEvent e) { 
@@ -206,9 +205,9 @@ public class ResortUI implements ActionListener {
         }
 
         else if (option.equals("Generic")) {
-            Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField()};
+            Object[] fields = {"Enter card name", new JTextField(), "Enter luxury rating:", new JTextField(), "Enter starting balance:", new JTextField()};
             JOptionPane.showConfirmDialog(mainPanel, fields, "Enter card information", JOptionPane.OK_CANCEL_OPTION);
-            wayward.makeCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()));
+            wayward.makeCard(((JTextField) fields[1]).getText(), Integer.parseInt(((JTextField) fields[3]).getText()), Integer.parseInt(((JTextField) fields[5]).getText()));
         }
         textArea.setText("{option} card created");
     }
@@ -252,5 +251,8 @@ public class ResortUI implements ActionListener {
         adminButtonPanel.setVisible(false);
     }
 
-    public static void main(String[] args) { ResortUI GUI = new ResortUI(); }
+    public static void main(String[] args) { 
+        ResortUI GUI = new ResortUI(); 
+        GUI.run();
+    }
 }

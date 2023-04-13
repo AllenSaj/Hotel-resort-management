@@ -1,6 +1,6 @@
 
 /**
- * Write a description of class Tourist here.
+ * Tourist class is a child of the Card class, describes a specific type of card held by a tourist
  */
 public class Tourist extends Card {
     private String country;
@@ -15,7 +15,7 @@ public class Tourist extends Card {
     
     /**
      * 
-     *
+     
      * @param  
      * @return    
      */
@@ -45,27 +45,49 @@ public class Tourist extends Card {
      */
     public int getJourneyPts() { return super.getJourneyPts(); }
     
+    /**
+     * @return
+     */
     public String getCountry() { return country; }
     
+    /**
+     * @param
+     * @return
+     */
     public void addCredits(int c) { super.addCredits(c); }
     
+
+    /**
+     * @param
+     * @return
+     */
     public void deductCredits(int c) { super.deductCredits(c); }
     
+    /**
+     * @param
+     * @return
+     */
     public void addJourneyPts(int j) { super.addJourneyPts(j); }
     
+    /**
+     * @param
+     * @return
+     */
     public void deductJourneyPts(int j) { super.deductJourneyPts(j); }
-    
+     
+    /**
+     * @return
+     */
     public void convertPts() { super.convertPts(); }
 
+    /**
+     */
     public void useFerry() {
        super.useFerry();
        super.deductCredits(1);
     }
     
-    /**
-     * 
-     *
-     * @param  
+    /** 
      * @return    
      */
     public String toString() {

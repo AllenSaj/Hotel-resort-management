@@ -244,8 +244,8 @@ public class Resort implements ResortInterface {
         allIslands.get(0).enter(card);
     }
 
-    public void makeCard(String name, int lux) {
-        Card card = new Card(name, lux);
+    public void makeCard(String name, int lux, int creds) {
+        Card card = new Card(name, lux, creds);
         allCards.add(card);
         allIslands.get(0).enter(card);
     }
