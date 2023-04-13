@@ -74,6 +74,7 @@ public class ResortUI implements ActionListener {
         // Create the output text area
         Font font = new Font("Verdana", Font.BOLD, 16);
         textArea.setFont(font);
+        textArea.setEditable(false);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setPreferredSize(new Dimension(360, 1280));
         inputPanel.setLayout(new BorderLayout());

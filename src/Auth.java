@@ -4,7 +4,8 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,7 +32,8 @@ public class Auth implements ActionListener {
     private HashMap<String, String> credentials = new HashMap<String, String>();
 
     public Auth() {
-        credentials.put("allen", "admin");
+        String pass = encryptPassword("admin");
+        credentials.put("allen", pass);
     }
 
     public void login() {
@@ -99,13 +101,30 @@ public class Auth implements ActionListener {
         frameReg.setVisible(true);
     }
 
+    public String encryptPassword(String password) {
+        try {
+           MessageDigest md = MessageDigest.getInstance("SHA-256");
+           byte[] hash = md.digest(password.getBytes());
+           StringBuilder sb = new StringBuilder();
+           for (byte b : hash) {
+              sb.append(String.format("%02x", b));
+           }
+           System.out.println(sb.toString());
+           return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+           System.err.println("Error encrypting password: " + e.getMessage());
+           return null;
+        }
+     }
+
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton)e.getSource();
         String user = username.getText();
         String pass =  new String(password.getPassword());
+        String encryptedPass = encryptPassword(pass);
         String passConfirm = new String(password.getPassword());
         if (button == buttonLog) {
-            if (credentials.get(user).equals(pass)) {
+            if (credentials.get(user).equals(encryptedPass)) {
                 frameLogin.setVisible(false);
                 JOptionPane.showMessageDialog(ResortUI.frameMain, "Login Successfull");
                 this.loggedIn = true;
@@ -126,7 +145,7 @@ public class Auth implements ActionListener {
             else if (!pass.equals(passConfirm)) { JOptionPane.showMessageDialog(ResortUI.frameMain, "Passwords must match", "Registration error", JOptionPane.WARNING_MESSAGE); }
             else if (credentials.containsKey(user) ) { JOptionPane.showMessageDialog(ResortUI.frameMain, "Username already in use: Please choose another", "Registration error", JOptionPane.WARNING_MESSAGE);  }
             else { 
-                credentials.put(user, pass);
+                credentials.put(user, encryptedPass);
                 frameReg.setVisible(false);
                 JOptionPane.showMessageDialog(ResortUI.frameMain, "Account created");
             }
